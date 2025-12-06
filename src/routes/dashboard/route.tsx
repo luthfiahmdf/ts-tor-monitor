@@ -30,7 +30,7 @@ function DashboardLayout() {
   const { access_token } = useAuth()
   useEffect(() => {
     if (!access_token) {
-      navigate({ to: '/' })
+      navigate({ to: '/login' })
     }
   }, [access_token])
   return (

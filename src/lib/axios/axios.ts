@@ -21,13 +21,13 @@ Api.interceptors.request.use((config) => {
 
 Api.interceptors.response.use(
   (response) => response,
-  async (error) => {
-    const { signOut } = useAuth.getState()
+  (error) => {
+    const { access_token, hydrated, signOut } = useAuth.getState()
 
-    if (error.response?.status === 401) {
+    // hanya logout jika token sudah ter-load
+    if (hydrated && error.response?.status === 401 && access_token) {
       signOut()
     }
-
     return Promise.reject(error)
   },
 )
